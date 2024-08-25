@@ -38,25 +38,6 @@ export default function AddStore({ handlePageUpdate }) {
       .catch((err) => console.log(err));
   };
 
-  // Uploading image to cloudinary
-  const uploadImage = async (image) => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "inventoryapp");
-
-    await fetch("https://api.cloudinary.com/v1_1/ddhayhptm/image/upload", {
-      method: "POST",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("🚀 ~ .then ~ data:", data);
-        setForm({ ...form, image: data.url });
-        alert("Store Image Successfully Uploaded");
-      })
-      .catch((error) => console.log(error));
-  };
-
   return (
     // Modal
     <Transition.Root show={open} as={Fragment}>

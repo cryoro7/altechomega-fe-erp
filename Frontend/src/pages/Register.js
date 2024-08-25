@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UploadImage from "../components/UploadImage";
 
 function Register() {
   const [form, setForm] = useState({
@@ -36,25 +35,6 @@ function Register() {
       .catch((err) => console.log(err));
   };
   // ------------------
-
-  // Uploading image to cloudinary
-  const uploadImage = async (image) => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "inventoryapp");
-
-    await fetch("https://api.cloudinary.com/v1_1/ddhayhptm/image/upload", {
-      method: "POST",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setForm({ ...form, imageUrl: data.url });
-        alert("Image Successfully Uploaded");
-      })
-      .catch((error) => console.log(error));
-  };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -135,7 +115,6 @@ function Register() {
                   onChange={handleInputChange}
                 />
               </div>
-              <UploadImage uploadImage={uploadImage} />
             </div>
 
             <div className="flex items-center justify-between">
